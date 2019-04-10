@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	<div class="people">
+		<ul>
+			<li>Jack</li>
+			<li>Jenna</li>
+			<li>Rahul</li>
+			<li>Ashok</li>
+		</ul>
+	</div>
+
+
+
+	<script type="text/javascript">
+		// 1.....
+		// convery arriysh to array 
+		const people1 = Array.from(document.querySelectorAll('.people li'));
+		const names1 = people1.map(person => person.textContent);
+		
+		// 2....
+		const people2 = document.querySelectorAll('.people li');
+		const peopleArray = Array.from(people2, person => person.textContent);
+		console.log(peopleArray);	
+
+		// 3.....
+
+		function sumAll(){
+			const sum =  Array.from(arguments).reduce((prev, next) => prev + next , 0);
+			console.log(sum);
+			return sum;
+		}
+
+		sumAll(10,23,4,6,7,24);
+
+
+		// 4....
+		// create array from arguments 
+		const ages = Array.of(2,45,6,7,8,9,45);
+		console.log(ages);
+
+
+	</script>
+	
+</body>
+</html>
+

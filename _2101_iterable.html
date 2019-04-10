@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<script type="text/javascript">
+
+		const inventory = {
+			backpack: 10,
+			jeans : 5,
+			shoes: 4,
+			shirts: 5
+		};
+
+		// Object.keys
+		const nav = Object.keys(inventory).map(item => `<li> ${item} </li>`).join('');
+		console.log(nav);
+
+		// Object.values
+		const totalCounts = Object.values(inventory).reduce((a,b) => a + b , 0);
+		console.log(totalCounts);
+
+		Object.entries(inventory).forEach(([key, val]) => {
+			console.log(key, val);
+		})
+
+
+		for(const [key, val] of Object.entries(inventory)){
+			console.log(key, val);
+			if(key === 'jeans') { break; }
+		}
+
+
+	</script>
+
+</body>
+</html>

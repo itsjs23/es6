@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+
+	<div class='container'>
+
+		<!-- <video controls class="handsome"></video> -->
+		
+	</div>
+
+	<script type="text/javascript">
+
+		// 1........ fetch api 
+		// promise based 
+
+		// const url = 'https://jsonplaceholder.typicode.com/users';
+		// fetch(url)
+		// .then(res => res.json())
+		// .then(res => console.log(res))
+		// .catch(err => {console.error(err);});
+
+
+		// 2............. 
+		// promise based
+
+		// const video = document.querySelector('.handsome');
+		// navigator.mediaDevices.getUserMedia({video:true})
+		// .then(mediaStream => {
+		// 	video.srcObject = mediaStream;
+		// 	video.load();
+		// 	video.play();
+		// 	// video.src = window.URL.createObjectURL(mediaStream);
+		// 	// console.log(mediaStream);
+		// })
+		// .catch(err => {
+		// 	console.error(err);
+		// })
+
+
+		// 3.....
+
+		function breathe(timeInMilliSec){
+			return new Promise((resolve, reject) => {
+				if(timeInMilliSec < 500){
+					reject(new Error('time in ms is too low'));
+				}else{
+					setTimeout(() => resolve(` Done for ${timeInMilliSec} ms `), timeInMilliSec);
+				}
+			});
+		}
+
+		// 1.. promise version
+
+		// breathe(1000)
+		// .then(res => { console.log(res); return breathe(2000); })
+		// .then(res => {console.log(res); return breathe(1000); })
+		//  .then(res => {console.log(res); return breathe(500); })
+		// .then(res => {console.log(res); return breathe(200); })
+		// .then(res => {console.log(res); return breathe(3000); })
+		// .catch(err => { console.error(err); })
+
+
+		// 2.... async await 
+		// const go  = async () => {};
+
+		// async function go(){
+		// 	try{
+		// 		const res = await breathe(600);
+		// 		console.log(res);
+		// 		const res2 = await breathe(700);
+		// 		console.log(res2);
+		// 		const res3 =  await breathe(200);
+		// 		console.log(res3);
+		// 		const res4 =  await breathe(800);
+		// 		console.log(res4);
+		// 	}catch(err){
+		// 		console.error(err);
+		// 	};
+		// }
+
+		// go();
+
+
+		// 3 ......... high order function to wrap async await function for catch error
+
+		function catchError(fn){
+			return function(...args){
+				// not work
+				// try{
+				// 	fn();
+				// }catch(err){
+				// 	console.log(err);
+				// }	
+
+				return fn(...args).catch(err => console.log(err));
+			};
+		}
+
+		async function go(name){
+			console.log(`start procesing for ${name}`)
+			const res = await breathe(600);
+			console.log(res);
+			const res2 = await breathe(700);
+			console.log(res2);
+			const res3 =  await breathe(200);
+			console.log(res3);
+			const res4 =  await breathe(800);
+			console.log(res4);
+		}
+
+		const wrapFunction = catchError(go); 
+		wrapFunction('js');
+
+	</script>
+
+</body>
+</html>
+

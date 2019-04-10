@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<script type="text/javascript">
+		
+		// stored data in ket value pair
+		const dogs = new Map([['deena',2], ['dom',3]]);
+		dogs.set('tommy', 3);
+		dogs.set('sumo', 2);
+		dogs.set('hugo', 4);
+
+		// console.log(dogs);
+
+		// 1....
+		dogs.forEach(( val, key) => {
+			console.log(key, val);
+		});
+
+
+		console.log(dogs.has('tommy')); //true
+		dogs.delete('sumo'); 
+		dogs.set('mega',2); 
+
+
+		// 2....
+		for(const dog of dogs){
+			console.log(dog); // provide array first valye key and second value  ['key','value'] 
+		}
+
+		// 3....
+		for(const [key, val] of dogs){
+			console.log(key, val); // provide array first valye key and second value  ['key','value'] 
+		}
+
+
+		dogs.clear(); 
+
+		console.log(dogs);
+
+
+	</script>
+
+</body>
+</html>

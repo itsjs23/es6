@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<script type="text/javascript">
+		
+		//  set has unique values
+		// not an index based thing so if you access people[1] you get undefined 
+		const people = new Set();
+		people.add('jhamman');
+		people.add('bablu');
+		people.add('anil');
+		people.add('gooodooo');
+		console.log(people);
+
+		people.delete('bablu');
+		people.delete('jack');
+		console.log(people);
+		console.log(people.size);
+
+		// people.clear(); // clear Set
+		console.log(people);
+		console.log(people.values());
+
+		// you can use  genrator next on it 
+		// people.next();
+		// people.next();
+		// people.next();
+
+		for(const person of people){
+			console.log(person);
+		}
+
+		// 2............
+		const students = ['jhamman','bablu','anil','jhamman'];
+		const studentSet = new Set(students); // Set(3) {"jhamman", "bablu", "anil"} won't allow duplicate
+		console.log(studentSet)
+		console.log(studentSet.has('jhamman')); // true
+		console.log(studentSet.has('goodoooo')); // fasle
+
+		// 3..........
+		// set with brunch
+
+		const brunch = new Set(['jack','jenna', 'jain']);
+		const line = brunch.values();  // SetIterator {'jack','jenna', 'jain'}
+		
+		console.log(line.next().value); // jack
+		console.log(line.next().value); // jenna
+		
+		console.log(brunch); // {'jack','jenna', 'jain'}
+		console.log(line);  // {'jain'}
+		
+		// console.log(brunch.next()); //  don't have genrators here so give  TypeError: brunch.next
+		
+		console.log(brunch.add('john')); 
+		console.log(brunch.add('denial'));
+
+		console.log(brunch); // {"jack", "jenna", "jain", "john", "denial"}
+		console.log(line);  // {"jain", "john", "denial"}
+
+
+
+
+	</script>
+
+</body>
+</html>

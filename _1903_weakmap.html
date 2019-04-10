@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<script type="text/javascript">
+		let dog1 = {name:'tommy'};
+		let dog2 = {name:'jeena'};
+
+		const strongMap = new Map();
+		const weakMap = new WeakMap();  // doesnot have Symbol(Symbol.iterator) so we can't loop over it
+
+		strongMap.set(dog1, 'tommy is the best dog');
+		weakMap.set(dog2, 'jeena is the most calm');
+
+		console.log(strongMap);
+		console.log(weakMap);
+
+		console.log(strongMap.size); // 1
+		console.log(weakMap.size); // undefined
+
+
+		dog1 = null;
+		dog2 = null;
+
+
+		console.log(strongMap); // size 1
+		console.log(weakMap); // empty after some time when garbage collector runs
+
+	</script>
+
+</body>
+</html>

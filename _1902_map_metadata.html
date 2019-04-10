@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<div class="container">
+		<button>Snake</button>
+		<button>Cry</button>
+		<button>Ice Cream</button>
+		<button>Flaim</button>
+		<button>Dance</button>
+	</div>
+
+	<script type="text/javascript">
+		
+	// in map you can store key as an object 
+	const clickCounts = new Map();
+	const buttons = document.querySelectorAll('button');
+	buttons.forEach(button => {
+		clickCounts.set(button,0);
+		button.addEventListener('click', function(){
+			const val = clickCounts.get(this);
+			clickCounts.set(this, val + 1);
+			console.log(clickCounts);
+		})
+	});
+
+
+
+	console.log(clickCounts);
+
+
+
+
+</script>
+
+</body>
+</html>

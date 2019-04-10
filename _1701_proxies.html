@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+
+	<script type="text/javascript">
+
+		// hide this
+		const person = {name:'wes', age:100};
+
+		// show this to users
+		const personProxy = new Proxy(person, {
+			get(target, propery){
+				console.log(target, propery);
+				return (target[propery] || 'Nothings Found !!'); 
+			},
+			set(target, propery, value){
+				if(typeof value === 'string'){
+					target[name] = value.trim().toUpperCase();
+				}
+			}
+		});
+
+		console.log(personProxy.fname);
+		console.log(personProxy.name='  Jhamman Lal Sharma');
+	
+
+		// 2................
+
+		const phoneHandler = {
+			set(target, property, value){
+				target[property] = value.match(/[0-9]/g).join('');
+			},
+			get(target, property){
+				return target[property].replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
+			}
+		}
+
+		const phoneNumber = new Proxy({}, phoneHandler);
+
+		console.log(phoneNumber.work='(234) 236 2334');
+		console.log(phoneNumber.work);
+
+
+		// 3...........
+
+		const safeHandler =  {
+			set(target, property, value){
+				if(property in target){
+					target[property] = value;
+				}else{
+					const likeKey = Object.keys(target).find(k => k.toLowerCase() === property.toLowerCase());
+					if(likeKey){
+						throw new Error(`Oops! Looks like we already have an '${property}' proprty but with the case of '${likeKey}' `);
+					}					
+				}
+			}
+		}
+
+
+		const safety = new Proxy({id:1}, safeHandler);
+		console.log(safety.id = 200); // ok
+		console.log(safety);
+		console.log(safety.Id = 200); // give Error
+		console.log(safety.password = 'jackdenial'); // ok
+		console.log(safety.Password = 'jackdenial'); // give Error 
+
+
+
+	</script>
+
+
+</body>
+</html>

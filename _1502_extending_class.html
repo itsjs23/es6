@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+
+
+	<script type="text/javascript">
+
+
+		// 1............
+		
+		class Animal{
+
+			constructor(name){
+				this.name = name;
+				this.thirst = 100;
+				this.belly = [];
+			}
+
+			drink(){
+				this.thirst -= 10; 
+				return this.thirst;
+			}
+
+			eat(...foods){
+				for(let food of foods){
+					this.belly.push(food);
+				}
+				return this.belly;
+			}
+
+		}
+
+		const rhino = new Animal('rhino');
+		rhino.eat('burger','leafes');
+		rhino.drink();
+		rhino.drink();
+		console.log(rhino);
+
+
+
+		// 2....................
+
+		class Dog extends Animal{
+			constructor(name, breed='doberman'){
+				super(name);
+				this.breed = breed;
+			}
+
+			bark(){
+				console.log('bark bark');
+			}
+		}
+
+
+		const tommy = new Dog('tommy','desidog');
+		console.log(tommy);
+
+
+		
+
+		// 3.................
+
+		class MovieCollection extends Array{
+			// rest params
+			constructor(username, ...movieCollections){
+				// new Array(1,2,3,4);
+				// spread into
+				super(...movieCollections);
+				this.name =username;
+			}
+
+			add(movie){
+				this.push(moive);
+			}
+
+			printMovieNames(){
+				/**** for in *********/
+				for(let movie in this){
+					console.log(movie); // 0,1,2,3,4,name
+				}
+			}
+
+			printOnlyArrayValue(){
+
+				/**** for of *********/
+				// only loop over iterable porperty
+				for(let movie of this){
+					console.log(movie); // 0,1,2,3,4,name
+				}
+
+				/**** for each *********/
+				// only loop over iterable porperty
+				this.forEach(function(val, key){
+					console.log(key, val);
+				});				
+			}
+
+			topRated(limit=10){
+				// return this.sort((a, b) => (b.stars-a.stars)).slice(0, limit);
+				return this.sort((a, b) => (a.stars > b.stars ? -1 : 1) ).slice(0, limit);
+
+
+			}
+		}
+
+		const movies = new MovieCollection('Jhamman favirate movies', 
+			{name: 'ironman', stars:8}, 
+			{name: 'motherindia', stars:10}, 
+			{name: 'dangal', stars:9},
+			{name: 'a beautiful mind', stars:10}
+			);
+
+		movies.push({name:'unknown', stars:8});
+		// movies.printMovieNames();
+		// movies.printOnlyArrayValue();
+		console.log(movies.topRated(2));
+		console.log(movies);
+
+
+
+
+
+		</script>
+
+	</body>
+	</html>

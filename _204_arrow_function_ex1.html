@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Arrow Functions</title>
+</head>
+<body>
+
+  <ul>
+    <li data-time="5:17">Flexbox Video</li>
+    <li data-time="8:22">Flexbox Video</li>
+    <li data-time="3:34">Redux Video</li>
+    <li data-time="5:23">Flexbox Video</li>
+    <li data-time="7:12">Flexbox Video</li>
+    <li data-time="7:24">Redux Video</li>
+    <li data-time="6:46">Flexbox Video</li>
+    <li data-time="4:45">Flexbox Video</li>
+    <li data-time="4:40">Flexbox Video</li>
+    <li data-time="7:58">Redux Video</li>
+    <li data-time="11:51">Flexbox Video</li>
+    <li data-time="9:13">Flexbox Video</li>
+    <li data-time="5:50">Flexbox Video</li>
+    <li data-time="5:52">Redux Video</li>
+    <li data-time="5:49">Flexbox Video</li>
+    <li data-time="8:57">Flexbox Video</li>
+    <li data-time="11:29">Flexbox Video</li>
+    <li data-time="3:07">Flexbox Video</li>
+    <li data-time="5:59">Redux Video</li>
+    <li data-time="3:31">Flexbox Video</li>
+  </ul>
+
+  <script>
+
+// 1.........
+
+let total = 0;
+
+// annonomys function
+// document.querySelectorAll('li').forEach(function(li){
+//   if(li.innerText.search('Flexbox') !== -1){
+//     const timeParts = li.dataset["time"].split(":");
+//     total += ( parseFloat(timeParts[0]) * 60 +  parseFloat(timeParts[1]) ) ;
+//   }
+// });
+// console.log(`${total} seconds `);
+
+
+// arrow function
+// document.querySelectorAll('li').forEach( (li) => {
+//   if(li.innerText.search('Flexbox') !== -1){
+//     const timeParts = li.dataset["time"].split(":");
+//     total += ( parseFloat(timeParts[0]) * 60 +  parseFloat(timeParts[1]) ) ;
+//   }
+// });
+// console.log(`${total} seconds `);
+
+
+// 2.........
+
+// node list are not true arrays 
+// they don't work with map and filterss
+// so we have to convert nodelists to array 
+// const lists = Array.from(document.querySelectorAll('li'));
+let lists = Array.from(document.querySelectorAll('[data-time]'));
+
+// lists.filter((list) => {
+//   // if(list.innerText.search() !== -1){
+//   //   return true ;
+//   // }
+//   // return false;
+//   return (list.innerText.search('Flexbox') !== -1 ? true : false);
+// });
+
+const filteredItems = lists
+                      .filter( (list) => list.textContent.includes('Flexbox'))
+                      .map( list =>  list.dataset.time )
+                      .map(timeCode => {
+                        const parts =  timeCode.split(':').map(timePart => parseInt(timePart));
+                        return ((parts[0] * 60) + parts[1]);
+                      })
+                      .reduce((runningTotal, seconds) =>  runningTotal + seconds , 0);
+
+
+console.log(filteredItems);
+
+
+
+
+
+
+</script>
+</body>
+</html>

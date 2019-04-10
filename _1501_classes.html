@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<script type="text/javascript">
+
+		// 1.....
+
+		//  function Constructor
+		function Dog(name, breed){
+			this.name = name;
+			this.breed = breed;
+		}
+
+		Dog.prototype.bark = function(){
+			console.log(`Bark Bark! My name is ${this.name}`);
+		}
+
+		const snickers = new Dog('snickers', 'King Charles');
+		const sunny = new Dog('Sunny', 'Golden Doggle');
+
+		Dog.prototype.bark = function(){
+			console.log(`Bark Bark New ! My name is ${this.name}`);
+		}
+
+		Dog.prototype.cuddle = function(){
+			console.log(`i love owner`);
+		}
+
+
+
+		class Dogs{
+
+			constructor(name, breed){
+				this.name = name;
+				this.breed = breed;
+			}
+
+			bark(){
+				console.log(`Bark Bark! My name is ${this.name}`);
+			}
+
+			cuddle(){
+				console.log(`i love owner`);
+			}
+
+
+			// access by Dog.info()
+			static info(){
+				console.log(`my info`);
+			}
+
+			get description() {
+                return `dog name is ${this.name}`;
+            }
+
+            set name(nameTxt){
+            	this.name = nameTxt;
+            }
+
+		}
+
+
+
+		const bullDog = new Dogs('bulldog', 'bulldog');
+		const doberman = new Dogs('doberman', 'doberman');
+
+
+
+		
+	</script>
+
+</body>
+</html>

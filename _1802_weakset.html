@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<script type="text/javascript">
+		
+		let dog1 = { name : 'tommy' , age : 3 };
+		let dog2 = { name : 'sumo' , age : 2 };
+
+	/*
+	
+	------ POINTS ------
+
+	1. WeakSet only contain Objects	
+	2.  you can't loop over WeakSet
+	3. there is not .clear() method on WeakSet  , WaekSet sorts to clear them up  its done garbage collection and memory things
+	   ex. if you remove dog2 it automtically garbage collected dog2 	
+	   */
+	   const weakDogSet = new WeakSet([dog1, dog2]);
+	   console.log(weakDogSet);
+	   dog1 = null;
+	   setTimeout(function(){
+	   	console.log(weakDogSet);
+	   }, 8100);
+
+
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The ...Spread Operator</title>
+  <style>
+    body {
+      min-height: 100vh;
+      font-family: sans-serif;
+      background: #ffc600;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 50px;
+      color:white;
+      text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+    }
+    .jump span {
+      position: relative;
+      display: inline-block;
+      transition: transform 0.1s;
+      cursor:url('santahand.png'), default;
+    }
+    .jump span:hover {
+      transform:translateY(-20px) scale(2) rotate(10deg);
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <h2 class="jump">SPREADS!</h2>
+
+  <div class="people">
+    <ul>
+      <li>Jack</li>
+      <li>Jeena</li>
+      <li>Denial</li>
+      <li>Reena</li>
+    </ul>
+  </div>
+
+  <script>
+
+  // 1........
+
+  const heading = document.querySelector('.jump');
+  heading.innerHTML = sparanWrap(heading.textContent);
+
+  function sparanWrap(word) {
+    return [...word].map(letter => `<span>${letter}</span>`).join('');
+  }
+
+  // 2.........
+  const people = document.querySelectorAll('div.people li');
+  // map is not available on people arrayish 
+  // we have to convert it to array
+
+  const peopleArr = Array.from(people);
+  console.log(peopleArr);
+
+  const peopleArrV2 = [...people];
+  const names = peopleArrV2.map(person => person.textContent);
+  console.log(peopleArrV2);
+  console.log(names);
+
+
+  // 3...........
+
+  const deepDish = {
+    pizzaName: 'Deep Dish',
+    size: 'Medium',
+    ingredients: ['Marinara', 'Italian Sausage', 'Dough', 'Cheese']
+  };
+
+  const shoppingList = ['Milk', 'Flour', ...deepDish.ingredients];
+  // console.log(shoppingList);
+
+  const comments = [
+  { id: 209384, text: 'I love your dog!' },
+  { id: 523423, text: 'Cuuute! 🐐' },
+  { id: 632429, text: 'You are so dumb' },
+  { id: 192834, text: 'Nice work on this wes!' },
+  ];
+
+
+  const id = 632429;
+  const commentIndex = comments.findIndex(comment => comment.id === id);
+  // comments.splice(commentIndex,1);
+  // console.log(comments);
+
+  const newComments = [...comments.slice(0,commentIndex), ...comments.slice(commentIndex + 1)];
+  console.log(newComments);
+
+  // 4.........
+  const num1 = [1,2,3];
+  const num2 = [4,5];
+  // we here spread into an array 
+  // you can spread into function
+  num1.push(...num2);
+  console.log(num1);
+
+
+  // 5....
+  function sayHi(first, last){
+    console.log(`hey ${first} ${last}`);
+  }
+
+  const name = ['jhamman' , 'sharma'];
+  console.log(sayHi(...name));
+
+
+</script>
+</body>
+</html>

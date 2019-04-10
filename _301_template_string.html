@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.highlight{
+			background-color: #ccee11;
+			font-weight: 700;
+			/*padding: 5px;*/
+			margin: 0 4px;
+			border-radius: 1px;
+		}
+	</style>
+</head>
+<body>
+
+
+
+	<div id="bio">
+		
+	</div>
+
+
+	<script src="js/dist/dompurify/purify.min.js"></script>
+
+	<script type="text/javascript">
+
+
+	// 1....
+
+	const name = 'Jhamman';
+	const age = 28;
+
+	const text = ` my name is ${name} and i am ${age} old `;
+
+	const oldTimeMultiLine = 'Good Morning \
+	jhamman sharma \
+	';
+
+	const element = ` 
+	<div>
+	Hello World
+	</div>
+	`;
+
+
+
+	  // 2....... Creating Fragment with template string 
+
+	  const users = [
+	  {name : 'jhamman' , occupation: 'software engineer', hobby: 'surf the net'},
+	  {name : 'bablu' , occupation: 'doctor', 'hobby' : 'lazy guy'},
+	  {name : 'anil' , occupation: 'student'}
+	  ];
+
+
+	  const markup = ` 
+	  <ul>
+	  ${users.map(user => `<li>${user.name} has hobby ${user.hobby || 'nothing' }</li>`).join('')}
+	  </ul>
+	  `;
+
+	   // document.body.innerHTML = markup;
+	   console.log(markup);
+
+
+
+
+	  // 3.........
+
+	  const userDetails = {
+	  	name : "jhamman sharma",
+	  	keywords : ['test', 'hi', 'by']
+	  };
+
+	  function renderKeywords(keywords){
+	  	keywords = keywords || [];
+
+	  	return ` 
+	  	${keywords.map(keyword => `<li>${keyword}</li>`).join('')}
+
+	  	`;
+
+	  }
+
+	  const markup2 = `
+	  <div>
+	  <h3>${userDetails.name}</h3>
+	  <h5>List Of Keywords</h5>
+	  <ul>
+	  ${renderKeywords(userDetails.keywords)}
+	  </ul>
+	  </div>
+
+	  `;
+
+	  console.log(markup2);
+
+
+	     // 4......... Tagged template literals
+
+
+	     function highlight(strings, ...values){
+	     		// debugger;
+	     		let str = '';
+	     		strings.forEach((string, i) => {
+				// str += string + (values[i] || '');
+				str += ` ${string} <span class='highlight' contenteditable> ${ (values[i] || '') } </span>  `;
+			});
+	     		return str;
+	     	}
+
+	     	const studentName = 'Jack denial',
+	     	std = 10,
+	     	sentense = highlight` student ${studentName} is studying in std ${std}  `;
+
+	     	// document.body.innerHTML = sentense;
+	     	console.log(sentense);
+
+
+
+	    // 5......... excersize
+
+	    function addAbbriviations(strings, ...values){
+	    	const abbriviated =values.map((value) => {
+	    		return (dict[value] ?  `<abbr title="${dict[value]}" > ${value} </abbr>` : value);
+	    	});
+	    	// console.log(abbriviated);
+
+	    	return (strings.reduce((sentense, string, i) => {
+	    		return  `${sentense}${string} ${abbriviated[i] || ''}`
+	    	},'') );
+
+	    }
+
+	    const dict = {
+	    	'HTML' : 'Hpertext markup lang',
+	    	'CSS' : 'cascade style sheet',
+	    	'JS' : 'javascript'
+	    };
+
+	    const firstName = 'Jhamman', lastName = 'sharma';
+
+
+
+	    const phrase = addAbbriviations` my name is ${firstName} ${lastName} and i love to code in
+	    ${'HTML'} ${'CSS'} ${'JS'} `;
+
+				// console.log('-------',phrase);
+
+				const bio = document.getElementById('bio');
+				const p = document.createElement('p');
+				p.innerHTML = phrase;
+				bio.appendChild(p);
+
+
+
+			// 6.......... sanitize 
+			
+			function sanitize(strings, ...values){
+				const dirty = strings.reduce((prev, next, i) => {
+					return `${prev} ${next} ${values[i] || ''} `;
+				},'');
+					return DOMPurify.sanitize(dirty);
+				// return strings;
+			}	
+
+			const myName = 'jhamman sharma';
+			const aboutMe = sanitize`I do evil thinsgs <span onclick="alert(\' you hacked \');">CLICK HERE </span>`;
+			const htmltext = ` 
+				<h3>${myName}</h3>
+				<p>${aboutMe}</p>
+			`;
+
+			const bio2 = document.getElementById('bio');
+				const p2 = document.createElement('p');
+				p2.innerHTML = htmltext;
+				bio2.appendChild(p2);
+
+
+		</script>
+
+	</body>
+	</html>

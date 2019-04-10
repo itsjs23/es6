@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<script type="text/javascript">
+			 // es6promisfy libarary
+			// node built in util package that comes with node to promisfy things
+
+		
+		// promisify function
+		function getCurrentPosition(...args){
+			return new Promise((resolve, reject) => {
+				navigator.getlocation.getCurrentPosition(...args, resolve, reject);
+			});
+		}
+
+
+		// getCurrentPosition()
+		// .then(pos => { console.log(pos); })
+		// .catch(err => { console.log(err); })
+
+		async function go(){
+			const pos = await getCurrentPosition();
+			console.log(pos);
+		}
+
+		go();
+
+		// callback function 
+
+		// navigator.getlocation.getCurrentPosition(function(pos){
+		// 	console.log(pos);
+		// },function(err){
+		// 	console.log(err)
+		// });
+
+	</script>
+
+</body>
+</html>

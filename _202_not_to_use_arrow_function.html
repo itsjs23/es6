@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Arrow Function not to used</title>
+	<style type="text/css">
+		button{
+			width: 200px;
+			height: 100px;
+		}
+
+		.on{
+			background-color: #ff3300;
+		}
+	</style>
+</head>
+<body>
+
+
+<button id="pushme">CLICK ME</button>
+
+<script type="text/javascript">
+
+	// 1...........
+
+	// arrow function won't bind this button 
+	// instead its bound to parent scope that  is in 
+	// global scope (window)
+
+	// btn.addEventListener('click', () => {
+	// 	this.classList.toggle('on');
+	// });
+
+	const btn = document.getElementById('pushme');
+	btn.addEventListener('click', function(){
+		this.classList.toggle('on');
+	});
+
+
+	// 2..........
+
+	// when you need to bind a method to an object
+	const person = {
+		points: 23,
+		// score: () => {
+		// 	this.points++;
+		// }
+
+		// written like below
+
+		// score: function(){
+		// 	this.points++;
+		// } 
+
+		score() { this.points++; }
+	};
+
+	person.score();
+	console.log(person.points);
+
+
+	
+
+	// 3.....
+
+	// when you need to add prototype method
+
+	class Car{
+		constructor(make, colour){
+			this.make = make;
+			this.colour = colour; 
+		}
+	}
+
+	// Car.prototype.summarize = () => {
+	// 	return `car make by ${this.make} and in color ${this.colour}`;
+	// }
+
+	Car.prototype.summarize = function(){
+		return `car make by ${this.make} and in color ${this.colour}`;
+	}
+
+	const beemer = new Car('bmw', 'blue');
+	const ferari = new Car('ferari', 'red');
+
+	console.log(beemer.summarize());
+	console.log(ferari.summarize());
+
+
+
+	// 4.......
+
+	//  when you need "arguments" object
+
+	// reference error : arguments not defined  	
+	// const userCount = () => {
+	// 	const users = Array.from(arguments); 
+	// 	return 	users.map((user, i) => {
+	// 		return `${i}. ${user}`;	
+	// 	});
+	// };
+
+	const userCount = function(){
+		const users = Array.from(arguments); 
+		return 	users.map((user, i) => {
+			return `${i+1}. ${user}`;	
+		});
+	};
+
+
+	console.log(userCount('jack','jeena'));
+
+
+</script>
+
+
+
+</body>
+</html>

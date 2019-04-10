@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<script type="text/javascript">
+
+		// 1............
+
+		function* listPeople(){
+			let str = '';
+			yield str += ' I am jhamman';
+			yield str += ' and my wife rashmi';
+			yield str +=' and my  lovely child goodoooo';
+			return 'My Fmaily ' + str;
+		} 
+
+		const people = listPeople();
+		console.log(people);
+
+
+		// 2...........
+
+		const data = [
+		{name:'jhamman' , age:28},
+		{name:'rashmi' , age:24},
+		{name:'netra' , age:.4},
+		{name:'bably' , age:24},
+		{name:'anil' , age:21}
+		];
+
+
+		function* loop(arr){
+			for(const item of arr){
+				yield item;
+			}
+		}
+
+		const dataGenrator = loop(data);
+     	console.log(dataGenrator.next().value);
+
+
+		// 3.............
+
+		function ajax(url){
+			fetch(url).then(data => data.json()).then(data => dataGen.next(data));
+		}
+
+		function* steps(){
+			console.log('fetching users');
+			const users = yield ajax('https://jsonplaceholder.typicode.com/users');
+			console.log(users);
+
+			console.log('fetching posts');
+			const posts = yield ajax('https://jsonplaceholder.typicode.com/posts');
+			console.log(posts);
+
+			console.log('fetching comments');
+			const comments = yield ajax('https://jsonplaceholder.typicode.com/comments');
+			console.log(comments);
+
+		}
+
+
+		// const dataGen = steps();
+		// dataGen.next(); // start ajax process
+
+
+		// 4............
+		// you can loop through genrators using for of loop
+
+
+		function* taskList(){
+			yield 'listout  goals';
+			yield 'daily goal';
+			yield 'weekely goal';
+			yield 'monthly goal';
+			yield 'yearly goal';
+		}
+
+
+		const tasks = taskList();
+
+		for(let task of tasks){
+			// console.log(tasks.next());
+			console.log(task);
+		}
+
+	</script>
+
+</body>
+</html>
