@@ -1,0 +1,62 @@
+{
+  "name": "sterlingnow-api",
+  "private": true,
+  "version": "1.0.0",
+  "description": "SterlingNOW API V2",
+  "engines": {
+    "node": "^10.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "sterlingnow-api"
+  },
+  "nyc": {
+    "include": [
+      "util/*.js",
+      "api/services/*.js"
+    ],
+    "all": true
+  },
+  "dependencies": {
+    "async": "2.6.2",
+    "bcryptjs": "2.4.3",
+    "bull": "3.6.0",
+    "deasync": "0.1.14",
+    "ejs": "2.6.1",
+    "express": "4.16.4",
+    "express-mysql-session": "2.1.0",
+    "http-proxy": "1.17.0",
+    "jsonwebtoken": "8.4.0",
+    "lodash": "4.17.11",
+    "moment": "2.24.0",
+    "moment-range": "4.0.1",
+    "nodemailer": "5.1.1",
+    "redis": "2.8.0",
+    "request": "2.88.0",
+    "sails": "1.1.0",
+    "sails-disk": "1.1.0",
+    "sails-hook-autoreload": "1.1.0",
+    "sails-hook-orm": "2.1.1",
+    "sails-mysql": "1.0.1",
+    "uuid": "3.3.2",
+    "validator": "10.11.0"
+  },
+  "devDependencies": {
+    "@sailshq/eslint": "4.19.3",
+    "chai": "4.2.0",
+    "forever": "0.15.3",
+    "mocha": "5.2.0",
+    "nyc": "13.2.0",
+    "pm2": "3.2.9",
+    "supertest": "3.4.2"
+  },
+  "scripts": {
+    "debug": "node debug app.js",
+    "start": "NODE_ENV=production APP_ENV=local forever --minUptime 2000 --spinSleepTime 2000 app.js",
+    "lint": "eslint . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
+    "test": "node ./node_modules/mocha/bin/mocha --exit test/mocha-init.js test/**/*.test.js",
+    "test-coverage": "nyc --reporter=text npm test"
+  },
+  "main": "app.js",
+  "author": "Shiming Sun <shiming.sun@sterlingts.com>"
+}
